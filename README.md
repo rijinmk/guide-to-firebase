@@ -158,7 +158,7 @@ var password = "mynewpassword";
 auth.signInWithEmailAndPassword(username, password);
 ```
 
-This will sign the user in, **IF** the user exists, If the user doesnt exist, you can see an *uncaught* error on the `console.log` area of your website. You have to *catch* the error by adding. This catch eill catch all the errors including *wrong email format*. 
+This will sign the user in, **IF** the user exists, you can see an *uncaught* error on the `console.log` area of your website. You have to *catch* the error by adding. This catch will catch all the errors including *wrong email format*. 
 
 ```javascript
 ...
