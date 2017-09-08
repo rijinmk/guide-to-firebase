@@ -194,6 +194,92 @@ auth.onAuthStateChanged(function(user){
 
 The `user` variable, in the scope of the function contains every detail of the user - Their Email-ID, Display Name, Display Image etc, But most importantly it contains the USER ID or the **UID**. You can get the UID by `user.uid`.
 
+## FIREBASE REAL-TIME DATABASE
+
+Firebase Real-Time Database is basically a JSON structure which can be **referenced** useing the `.ref('path/to/ref/')` method. Here's the basics of references and usign the `.child('path')` to access different parts of the JSON object in the firebase database. 
+![Firebase ref & child basics](http://i.imgur.com/ImjcfQw.jpg)
+
+You might be wondering how this might look in code, the entire database is in the form of JSON. Then you REFERENCE `.ref('object')`, We are actually referencing that JSON object in the database. It looks something like this.. 
+
+```json
+{
+  "DRAW" : {
+    "DRAW1" : {
+      "mouse" : {
+        "x" : 503,
+        "y" : 21
+      }
+    },
+    "DRAW2" : {
+      "mouse" : {
+        "x" : 509,
+        "y" : -3
+      }
+    }
+  },
+  "PHILOTES" : {
+    "users" : {
+      "GUN4jva1CGSSpHDEZr0gFqfEU7G3" : {...},
+      "Nlh0ZMLgS5RFgW799O7Lzq0TJNt2" : {
+        "chatting" : 0,
+        "date" : "18:4:18 - 7 September2017",
+        "defaultDisplayImage" : "https://cdn.dribbble.com/users/125948/screenshots/1924815/profileicondribbble_1x.png",
+        "displayImage" : "Nlh0ZMLgS5RFgW799O7Lzq0TJNt2/19598973_10155838951560628_5743553805312788830_n.jpg",
+        "email" : "rijin.mk9@gmail.com",
+        "fullname" : "Rijin Mk",
+        "live-drawing" : {
+          "mouse" : {
+            "x" : -22.5,
+            "y" : 370.25
+          }
+        },
+        "live-message" : {
+          "GUN4jva1CGSSpHDEZr0gFqfEU7G3" : {
+            "current-text" : "HAHAHAAHAH"
+          },
+          "RKXDC6e6o1bIVijGqKSFsedsf8u2" : {
+            "current-text" : "BAIIII. "
+          },
+          "cHFNau7tvdV4e5jPDyluBKELiuf2" : {
+            "current-text" : "Whats up"
+          },
+          "gt1EGNM7QjVlD6unY9AmRdbMhIC3" : {
+            "current-text" : "What................."
+          },
+          "oJiCU6deKMV5SWpF8dDkV01zERZ2" : {
+            "current-text" : "Hey"
+          }
+        },
+        "username" : "rijinmk"
+      },
+      "RKXDC6e6o1bIVijGqKSFsedsf8u2" : {
+        "chatting" : 0,
+      ...
+ ```
+ 
+ ### GETTING DATA FROM THE FIREBASE DATABASE
+ 
+There are two main methods to get data from the database. `.on('event',callback)` and `.once('event',callback)`. This method should be called on the reference. When you call `.on()` or `.once()` on a specific reference (`.ref('path').on()`) on the database. 
+ 
+#### The "REALTIMEness" of Firebase Database
+
+The realtime-ness of the Firebase Database is all on this magnificient method `.on('event',callback)`. The `callback` is triggered whenever that `event` is happening and `.on()` makes it realtime, `.once()` as its name suggest is only called once. 
+
+To make a call on a specific part of the JSON object in the database, We have the following sytax: 
+
+```javascript
+var database = firebase.database(); 
+var ref = database.ref('path/to/object');
+
+ref.on('value',function(data){
+  console.log(data.val()); 
+}); 
+```
+
+The `event` here is `value`, There are several other events, You can find it [here](https://www.tutorialspoint.com/firebase/firebase_event_types.htm). The callback takes one argument, That is the `data`, Which contains all the information about the contents on that JSON object that has been pointed by the reference. The `.val()` method used on `data` will give out all the information about the recived data, In the form of a Javascript Object. 
+
+
+
 
 
 
